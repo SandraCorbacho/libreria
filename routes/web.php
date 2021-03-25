@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::middleware('auth:api')->group(function(){
+    Route::get('user',[UserController::class,'details']);
+    Route::resource('welcome', WelcomeController::class);
+});
+
+Route::post('login',[UserController::class,'login']);
+Route::post('register', [UserController::class,'register']);
