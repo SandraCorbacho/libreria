@@ -41,11 +41,12 @@ public function login(Request $request){
         $success['token'] =  $user->createToken('Laravel Personal Access Client')->accessToken;
         
         $success['user'] =  $user->email;
-      
+        
         if(!$user->isAdmin()){
-            return view('front.home');
+            return redirect()->route('home');
         };
-        return view('admin.home');
+        
+        return redirect()->route('admin');
     }else{
         return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
     }
@@ -58,5 +59,9 @@ public function login(Request $request){
     public function details()
     {
         return response()->json(['user' => auth()->user()], 200);
+    }
+    public function logout(){
+        Auth::logout();
+        return redirect('/');
     }
 }

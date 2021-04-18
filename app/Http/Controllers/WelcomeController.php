@@ -1,22 +1,41 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Book;
+use App\Models\User;
 
-class WelcomeController extends BaseController
+class WelcomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        dd('eee');
+        $books = Book::get();
+     
+        return view('front.home',[
+            'books' => $books
+        ]);
     }
 
+    public function admin()
+    {
+        
+        $books = Book::get();
+        $totalUsers = User::get();
+        return view('admin.home',[
+            'books' => $books,
+            'users' => $totalUsers,
+            'categories' => $books,
+            'orders' => $books
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
