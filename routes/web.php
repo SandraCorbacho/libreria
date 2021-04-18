@@ -10,6 +10,13 @@ Route::middleware('auth:api')->group(function(){
     Route::get('user',[UserController::class,'details'])->name('user');
     //Route::resource('welcome', 'WelcomeController');
 });
+///Backoffice
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']],function(){
+    Route::get('home',function(){
+        return view('admin.home');
+    });
+});
+
 
 Route::get('login',function(){
     return view('auth.login');
@@ -21,3 +28,7 @@ Route::get('register',function(){
     return view('auth.register');
 })->name('register');
 Route::post('register', [UserController::class,'register']);
+
+Route::get('profile',function(){
+    return view('auth.profile');
+})->name('profile');

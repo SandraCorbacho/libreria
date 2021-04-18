@@ -22,9 +22,9 @@ public function register(Request $request)
     $dataValidated['password']=Hash::make($request->password);
 
     $user = User::create($dataValidated);
+    $token = $user->createToken('Laravel Personal Access Client')->accesToken;
 
-    $token = $user->createToken('AppNAME')->accessToken;
-
+    //return response()->json(['token'=>$token],200);
     return redirect()->route('welcome');
 }
 
@@ -33,16 +33,20 @@ public function register(Request $request)
  * @return \Illuminate\Http\Response
  */
 public function login(Request $request){
-    dd($request->all());
+    
     if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
 
         $user = Auth::user();
-        $success['token'] =  $user->createToken('AppName')-> accessToken;
+        
+        $success['token'] =  $user->createToken('Laravel Personal Access Client')->accessToken;
+        
         $success['user'] =  $user->email;
-
-        return $this->sendResponse($success, 'User login successfully.');
-    }
-    else{
+      
+        if(!$user->isAdmin()){
+            return view('front.home');
+        };
+        return view('admin.home');
+    }else{
         return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
     }
 }

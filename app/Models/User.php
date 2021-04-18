@@ -8,9 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
+use Laravel\Passport\Client as PassportClient;
+
 class User extends Authenticatable
 {
-    use Notifiable,HasApiTokens;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+   
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -90,6 +92,15 @@ public function hasAnyRole($roles)
         }
         return false;
     }
+    public function isAdmin(){
+        
+        if($this->roles()->where('name', 'Admin')->first()){
+            return true;
+        }
+            return false;
+        
+    }
+   
 }
 
 

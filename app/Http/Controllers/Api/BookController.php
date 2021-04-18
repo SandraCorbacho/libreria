@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class WelcomeController extends BaseController
+class BookController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class WelcomeController extends BaseController
      */
     public function index()
     {
-        dd('eee');
+        //
     }
 
     /**
@@ -35,7 +35,12 @@ class WelcomeController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $book = new Book;
+        $book->name = $request->name;
+        $book->pvp = $request->pvp;
+        $book->pvp_dicounted = $request->pvp_dicounted;
+        $book->stock = $request->stock;
+        $book->save();
     }
 
     /**
@@ -46,7 +51,7 @@ class WelcomeController extends BaseController
      */
     public function show($id)
     {
-        //
+        return $this::where('id',$id)->first();
     }
 
     /**
