@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class BookController extends BaseController
 {
@@ -14,7 +17,10 @@ class BookController extends BaseController
      */
     public function index()
     {
-        //
+        return view('admin.products.index',[
+            'books' => Book::get(),
+            'location' => 'Libro'
+        ]);
     }
 
     /**
@@ -24,7 +30,9 @@ class BookController extends BaseController
      */
     public function create()
     {
-        //
+        return view('admin.products.create',[
+            'location' => 'Libro Nuevo'
+        ]);
     }
 
     /**
@@ -35,13 +43,28 @@ class BookController extends BaseController
      */
     public function store(Request $request)
     {
-        $book = new Book;
-        $book->name = $request->name;
-        $book->pvp = $request->pvp;
-        $book->pvp_dicounted = $request->pvp_dicounted;
-        $book->stock = $request->stock;
-        $book->save();
+        
+        $validated = $request->validate([
+            'name' => 'required|unique:books',
+            'iban' => 'required|unique:books',
+            'pvp' => 'required',
+            'stock' => 'required'
+        ]);
+            if($validated){
+                $book = new Book;
+                $book->name = $request->name;
+                $book->iban = $request->iban;
+                $book->pvp = $request->pvp;
+                $book->pvp_discount = $request->pvp_discount;
+                $book->stock = $request->stock;
+                $book->save();
+                return redirect()->route('book.index');
+            }
+        return redirect()->back()->withErrors($validated)->withInput();
+           
     }
+
+    
 
     /**
      * Display the specified resource.
@@ -51,7 +74,8 @@ class BookController extends BaseController
      */
     public function show($id)
     {
-        return $this::where('id',$id)->first();
+        $book =  $this::where('id',$id)->first();
+        dd($book);
     }
 
     /**
@@ -62,7 +86,13 @@ class BookController extends BaseController
      */
     public function edit($id)
     {
-        //
+        $book =  new Book;
+        $book = $book->getById($id);
+
+        return view('admin.products.edit',[
+            'location' => 'Editar Libro',
+            'book' => $book
+        ]);
     }
 
     /**
@@ -74,7 +104,28 @@ class BookController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'name' => ['required',Rule::unique('books')->ignore($id)],
+            'iban' => ['required',Rule::unique('books')->ignore($id)],
+            'pvp' => ['required'],
+            'stock' => ['required'],
+        ]);
+        if($validation->fails()){
+            return redirect()->back()->withErrors($validation)->withInput();
+        };
+            $book =  new Book;
+            $book = $book->getById($id);   
+            $book->name = $request->name;
+            $book->iban = $request->iban;
+           
+            $book->pvp = $request->pvp;
+            if($request->pvp_discount != null){
+                $book->pvp_discount = $request->pvp_discount;
+            }
+            $book->stock = $request->stock;
+            $book->update();
+            return redirect()->route('book.index');
+       
     }
 
     /**

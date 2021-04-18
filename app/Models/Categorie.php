@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Categorie extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','pvp','pvp_disount','stock'];
+    protected $fillable = ['name'];
 
     public function getById($id){
-        return $this->where('id',$id)->first();
+        return $this->where('id',$id)->first(); 
     }
     
 }
