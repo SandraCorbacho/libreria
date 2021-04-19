@@ -41,6 +41,8 @@
                                 class="c-sidebar-nav-icon"></span> Libros</a></li>
                     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{route('categories.index')}}"><span
                                 class="c-sidebar-nav-icon"></span> Categorias</a></li>
+                    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{route('author.index')}}"><span
+                                class="c-sidebar-nav-icon"></span> Autores</a></li>
                 </ul>
             </li>
             <ul class="c-sidebar-nav-dropdown-items">

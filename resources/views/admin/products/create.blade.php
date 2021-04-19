@@ -47,6 +47,17 @@
                     <input type="number" name='stock'  class="form-control" @if(old('stock') != null) value="{{ old('stock') }}" @endif>
                 </div>
             </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Autor</label>
+                    <select name="author" id="">
+                        <option value="">Selecciona un autor</option>
+                        @foreach($autores as $author)
+                            <option value="{{$author->id}}">{{$author->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="row justify-content-end">
               <button ype="submit" class="btn btn-primary text-right">Guardar</button>
             </div>

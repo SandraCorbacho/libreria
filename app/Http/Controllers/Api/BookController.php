@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -31,7 +32,8 @@ class BookController extends BaseController
     public function create()
     {
         return view('admin.products.create',[
-            'location' => 'Libro Nuevo'
+            'location' => 'Libro Nuevo',
+            'autores' => Author::get()
         ]);
     }
 
@@ -48,6 +50,7 @@ class BookController extends BaseController
             'name' => 'required|unique:books',
             'iban' => 'required|unique:books',
             'pvp' => 'required',
+            'author' => 'required',
             'stock' => 'required'
         ]);
             if($validated){
@@ -56,6 +59,7 @@ class BookController extends BaseController
                 $book->iban = $request->iban;
                 $book->pvp = $request->pvp;
                 $book->pvp_discount = $request->pvp_discount;
+                $book->author_id = $request->author;
                 $book->stock = $request->stock;
                 $book->save();
                 return redirect()->route('book.index');
@@ -91,7 +95,8 @@ class BookController extends BaseController
 
         return view('admin.products.edit',[
             'location' => 'Editar Libro',
-            'book' => $book
+            'book' => $book,
+            'autores' => Author::get()
         ]);
     }
 
@@ -108,6 +113,7 @@ class BookController extends BaseController
             'name' => ['required',Rule::unique('books')->ignore($id)],
             'iban' => ['required',Rule::unique('books')->ignore($id)],
             'pvp' => ['required'],
+            'author' => ['required'],
             'stock' => ['required'],
         ]);
         if($validation->fails()){
@@ -116,6 +122,7 @@ class BookController extends BaseController
             $book =  new Book;
             $book = $book->getById($id);   
             $book->name = $request->name;
+            $book->author_id = $request->author;
             $book->iban = $request->iban;
            
             $book->pvp = $request->pvp;

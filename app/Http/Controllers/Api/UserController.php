@@ -62,6 +62,6 @@ public function login(Request $request){
     }
     public function logout(){
         Auth::logout();
-        return redirect('/');
+        return redirect()->route('welcome');
     }
 }

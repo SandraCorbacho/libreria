@@ -5,11 +5,10 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Api\CategorieController;
+use App\Http\Controllers\Api\AuthorController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [WelcomeController::class,'index'])->name('welcome');
 Route::middleware('auth:api')->group(function(){
     Route::get('user',[UserController::class,'details'])->name('user');
     //Route::resource('welcome', 'WelcomeController');
@@ -34,6 +33,12 @@ Route::prefix('admin')->middleware('role')->group(function () {
     Route::post('/categories/create',[CategorieController::class, 'store'])->name('categories.store');
     Route::get('/categories/edit/{id}',[CategorieController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/edit/{id}',[CategorieController::class, 'update'])->name('categories.update');
+
+    Route::get('/author',[AuthorController::class, 'index'])->name('author.index');
+    Route::get('/author/create',[AuthorController::class, 'create'])->name('author.create');
+    Route::post('/author/create',[AuthorController::class, 'store'])->name('author.store');
+    Route::get('/author/edit/{id}',[AuthorController::class, 'edit'])->name('author.edit');
+    Route::post('/author/edit/{id}',[AuthorController::class, 'update'])->name('author.update');
 });
 
 
