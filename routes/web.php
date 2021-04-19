@@ -58,3 +58,5 @@ Route::get('profile',function(){
     return view('auth.profile');
 })->name('profile');
 
+
+Route::get('/author/{id}',[WelcomeController::class,'author'])->name('author.detail');

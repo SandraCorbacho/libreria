@@ -17,5 +17,8 @@ class Book extends Model
     public function author(){
         return $this->hasOne(Author::class,'id','author_id')->first();
     }
+    public function getByAuthor($id){
+        return $this->where('author_id',$id)->get();
+    }
     
 }
