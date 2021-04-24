@@ -58,6 +58,17 @@
                     </select>
                 </div>
             </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Categoria</label>
+                    <select name="categoria_id" id="">
+                        <option value="">Selecciona una categoria</option>
+                        @foreach($categorias as $categoria)
+                            <option value="{{$categoria->id}}" @if($book->categoria_id == $categoria->id) selected @endif>{{$categoria->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="row justify-content-end">
               <button ype="submit" class="btn btn-primary text-right">Guardar</button>
             </div>

@@ -60,3 +60,4 @@ Route::get('profile',function(){
 
 
 Route::get('/author/{id}',[WelcomeController::class,'author'])->name('author.detail');
+Route::get('/categorie/{id}',[WelcomeController::class,'categorie'])->name('categorie.detail');

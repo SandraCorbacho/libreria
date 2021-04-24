@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Author;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -20,7 +21,7 @@ class BookController extends BaseController
     {
         return view('admin.products.index',[
             'books' => Book::get(),
-            'location' => 'Libro'
+            'location' => 'Libro',
         ]);
     }
 
@@ -33,7 +34,8 @@ class BookController extends BaseController
     {
         return view('admin.products.create',[
             'location' => 'Libro Nuevo',
-            'autores' => Author::get()
+            'autores' => Author::get(),
+            'categorias' => Categorie::get()
         ]);
     }
 
@@ -51,7 +53,8 @@ class BookController extends BaseController
             'iban' => 'required|unique:books',
             'pvp' => 'required',
             'author' => 'required',
-            'stock' => 'required'
+            'stock' => 'required',
+            'categoria_id' => 'required'
         ]);
             if($validated){
                 $book = new Book;
@@ -59,6 +62,7 @@ class BookController extends BaseController
                 $book->iban = $request->iban;
                 $book->pvp = $request->pvp;
                 $book->pvp_discount = $request->pvp_discount;
+                $book->categoria_id = $request->categoria_id;
                 $book->author_id = $request->author;
                 $book->stock = $request->stock;
                 $book->save();
@@ -96,7 +100,8 @@ class BookController extends BaseController
         return view('admin.products.edit',[
             'location' => 'Editar Libro',
             'book' => $book,
-            'autores' => Author::get()
+            'autores' => Author::get(),
+            'categorias' => Categorie::get()
         ]);
     }
 
@@ -115,6 +120,7 @@ class BookController extends BaseController
             'pvp' => ['required'],
             'author' => ['required'],
             'stock' => ['required'],
+            'categoria_id' => ['required']
         ]);
         if($validation->fails()){
             return redirect()->back()->withErrors($validation)->withInput();
@@ -124,7 +130,7 @@ class BookController extends BaseController
             $book->name = $request->name;
             $book->author_id = $request->author;
             $book->iban = $request->iban;
-           
+            $book->categoria_id = $request->categoria_id;
             $book->pvp = $request->pvp;
             if($request->pvp_discount != null){
                 $book->pvp_discount = $request->pvp_discount;

@@ -55,4 +55,13 @@ class WelcomeController extends Controller
             'authors' => Author::get()
         ]);
      }
+     public function categorie($id){
+        $books = new Book;
+        $books = $books->getByCategorie($id);
+        return view('welcome',[
+            'books' => $books,
+            'categories' => Categorie::get(),
+            'authors' => Author::get()
+        ]);
+     }
 }
