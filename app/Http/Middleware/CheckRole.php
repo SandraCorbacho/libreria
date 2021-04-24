@@ -21,7 +21,7 @@ class CheckRole
             return redirect()->route('welcome');
         };
         if (!empty($request->user()) && ($request->user()->hasRole('admin') || $request->user()->hasRole('loaders') ) ) {
-            return $next($request);
+            return redirect()->route('welcome');
         }
         
         if($request->user()->isAdmin()){
