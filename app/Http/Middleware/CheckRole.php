@@ -22,7 +22,7 @@ class CheckRole
             return $next($request);
         }
         
-       if(!$user->isAdmin()){
+       if(!$request->user()->isAdmin()){
             return redirect()->route('welcome');
         };
         
