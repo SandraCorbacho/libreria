@@ -17,7 +17,9 @@ class CheckRole
      */
     public function handle($request, Closure $next)
     {
-       
+        if(empty($request->user()) && empty(\Auth::user())){
+            return redirect()->route('welcome');
+        };
         if (!empty($request->user()) && ($request->user()->hasRole('admin') || $request->user()->hasRole('loaders') ) ) {
             return $next($request);
         }
