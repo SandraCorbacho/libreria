@@ -41,7 +41,6 @@ public function login(Request $request){
         $success['token'] =  $user->createToken('Laravel Personal Access Client')->accessToken;
         
         $success['user'] =  $user->email;
-        dd($user->isAdmin());
         if(!$user->isAdmin()){
             return redirect()->route('welcome');
         };
