@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\RoleUp;
+use App\Models\Role;
 
 class CheckRole
 {
@@ -22,14 +22,11 @@ class CheckRole
             return $next($request);
         }
         
-        $peticion = RoleUp::where('user_id','=',\Auth::User()->id)->first();
-        if($peticion!= null){
-           
-            if($peticion->atendida == 0){
-                return back()->withErrors(['Esperando respuesta del administrador']); 
-            }
-            
-        }
+        if($request->user()->isAdmin()){
+            return redirect()->route('admin');
+        };
+        
+        
         return back()->withErrors(['No estás autorizado']); 
     }
 }

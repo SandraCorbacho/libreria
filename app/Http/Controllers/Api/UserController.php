@@ -22,7 +22,7 @@ public function register(Request $request)
     $dataValidated['password']=Hash::make($request->password);
 
     $user = User::create($dataValidated);
-    $token = $user->createToken('Laravel Personal Access Client')->accesToken;
+    $success['token'] =  $user->createToken('Laravel Personal Access Client')->accessToken;
 
     //return response()->json(['token'=>$token],200);
     return redirect()->route('welcome');
