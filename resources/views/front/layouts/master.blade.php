@@ -19,13 +19,13 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
-        <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
-        <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
-        <link href="{{asset('css/prettyPhoto.css')}}" rel="stylesheet">
-        <link href="{{asset('css/price-range.css')}}" rel="stylesheet">
-        <link href="{{asset('css/animate.css')}}" rel="stylesheet">
-        <link href="{{asset('css/main.css')}}" rel="stylesheet">
-        <link href="{{asset('css/responsive.css')}}" rel="stylesheet">
+        <link href="https://still-inlet-71132.herokuapp.com/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://still-inlet-71132.herokuapp.com/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://still-inlet-71132.herokuapp.com/css/prettyPhoto.css" rel="stylesheet">
+        <link href="https://still-inlet-71132.herokuapp.com/css/price-range.css" rel="stylesheet">
+        <link href="https://still-inlet-71132.herokuapp.com/css/animate.css" rel="stylesheet">
+        <link href="https://still-inlet-71132.herokuapp.com/css/main.css" rel="stylesheet">
+        <link href="https://still-inlet-71132.herokuapp.com/css/responsive.css" rel="stylesheet">
         <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
