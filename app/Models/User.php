@@ -94,7 +94,7 @@ public function hasAnyRole($roles)
     }
     public function isAdmin(){
         
-        if($this->roles()->where('name', 'Admin')->first()){
+        if($this->roles()->where('name', 'admin')->first()){
             return true;
         }
             return false;
