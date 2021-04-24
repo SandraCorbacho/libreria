@@ -24,7 +24,7 @@ class WelcomeController extends Controller
         return view('welcome',[
             'books' => $books,
             'categories' => Categorie::get(),
-            'authors' => Author::get()
+            
         ]);
     }
 
