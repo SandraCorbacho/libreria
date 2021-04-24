@@ -17,18 +17,17 @@ class CheckRole
      */
     public function handle($request, Closure $next)
     {
-        if(empty($request->user()) && empty(\Auth::user())){
-            return redirect()->route('welcome');
-        };
-        if (!empty($request->user()) && ($request->user()->hasRole('admin') || $request->user()->hasRole('loaders') ) ) {
-            return redirect()->route('welcome');
+       
+        if (!empty($request->user()) && ($request->user()->hasRole('admin'))) {
+            return redirect()->route('admin');
         }
         
-        if($request->user()->isAdmin()){
-            return redirect()->route('admin');
-        };
+      
+            
+            return redirect()->route('welcome');
+       
         
         
-        return back()->withErrors(['No estás autorizado']); 
+        //return back()->withErrors(['No estás autorizado']); 
     }
 }
