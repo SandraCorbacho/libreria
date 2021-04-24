@@ -20,6 +20,7 @@ class CheckRole
        /* if(empty($request->user()) && empty(\Auth::user())){
             return redirect()->route('welcome');
         };*/
+        dd($request->user()->hasRole('admin'));
         if (!empty($request->user()) && ($request->user()->hasRole('admin') || $request->user()->hasRole('loaders') ) ) {
             
             return redirect()->route('admin');
