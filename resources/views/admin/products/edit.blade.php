@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group col-md-12">
                     <label for="inputPassword4">IBAN</label>
-                    <input type="text" name='iban' class="form-control" placeholder="Iban" @if(old('iban') != null) value="{{ old('iban') }}" @else  value = "{{$book->IBAN}}"  @endif>
+                    <input type="text" name='iban' class="form-control" placeholder="Iban" @if(old('iban') != null) value="{{ old('iban') }}" @else  value = "{{$book->iban}}"  @endif>
                 </div>
             </div>
             <div class="form-group">
