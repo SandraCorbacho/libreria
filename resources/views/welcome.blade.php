@@ -63,9 +63,11 @@
 							<h2>Autores</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
+									@if(isset($author) && $authors != null)
 									@foreach($authors as $author)
 										<li class='mb-3'><a style='height: 50px;' href="{{route('author.detail',$author->id)}}"> <span class="pull-right">{{$author->name}}</span></a></li>
 									@endforeach
+									@endif
 								</ul>
 							</div>
 						</div><!--/brands_products-->
